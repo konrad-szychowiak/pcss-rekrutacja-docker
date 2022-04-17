@@ -1,0 +1,16 @@
+FROM alpine AS builder
+
+RUN apk add gfortran
+RUN apk add make
+RUN apk add musl-dev
+
+WORKDIR /build
+
+COPY ./ ./
+
+WORKDIR /build/src
+RUN gfortran -o hello hello.f90
+
+RUN ls -la
+
+CMD ["./hello"]
